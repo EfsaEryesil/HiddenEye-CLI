@@ -35,8 +35,8 @@ hiddeneye_cli/
 Clone the repository:
 
 ```bash
-git clone [https://github.com/EfsaEryesil/HiddenEye-CLI.git](https://github.com/EfsaEryesil/HiddenEye-CLI.git)
-cd hiddeneye_cli
+git clone https://github.com/EfsaEryesil/HiddenEye-CLI.git
+cd HiddenEye-CLI
 ```
 Install dependencies:
 
@@ -47,7 +47,7 @@ pip install -r requirements.txt
 Run CLI Mode:
 ```bash
 
-python main.py -u [https://example.com](https://example.com)
+python main.py -u https://example.com
 ```
 Run GUI Mode:
 ```bash
