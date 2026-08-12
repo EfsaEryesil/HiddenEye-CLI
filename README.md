@@ -37,8 +37,9 @@ Clone the repository:
 ```Bash
 git clone [https://github.com/EfsaEryesil/HiddenEye-CLI.git](https://github.com/EfsaEryesil/HiddenEye-CLI.git)
 cd hiddeneye_cli
-Install dependencies:
 ```
+Install dependencies:
+
 ```
 Bash
 pip install -r requirements.txt
