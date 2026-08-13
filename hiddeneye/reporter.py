@@ -1,26 +1,33 @@
 from rich.console import Console
 from rich.table import Table
 
-console = Console()
-
 class Reporter:
     @staticmethod
-    def print_results(target_url, tech_data):
-        console.print(f"\n[bold green][+] HiddenEye Tarama Tamamlandı:[/bold green] {target_url}\n")
-
-        table = Table(title="👁️ HiddenEye Vulnerability Report", show_lines=True)
-        table.add_column("Technology", style="cyan", no_wrap=True)
-        table.add_column("Version", style="magenta")
-        table.add_column("Detected CVEs", style="red")
-        for tech in tech_data:
+    def print_results(url, detected_techs):
+        console = Console()
+        console.print(f"\n[bold green][+] HiddenEye Scan Completed:[/bold green] [bold cyan]{url}[/bold cyan]\n")
+        
+        table = Table(show_header=True, header_style="bold magenta")
+        table.add_column("Vendor / Product", style="cyan", width=25)
+        table.add_column("Version", style="green", width=15)
+        table.add_column("Vulnerabilities (CVEs)", style="red")
+        
+        for tech in detected_techs:
+           
+            vendor = tech.get("vendor", "Unknown").capitalize()
+            product = tech.get("product", "Unknown").capitalize()
+            tech_name = f"{vendor} / {product}" if vendor != product else product
+            
+            version = tech.get("version", "Unknown")
+            
+            
             cves = tech.get("cves", [])
-            if not cves:
-                cve_text = "[bold green]Clean / No Vulnerabilities Found[/bold green]"
+            if isinstance(cves, list) and cves:
+                cve_text = ", ".join(cves)
             else:
-                cve_text = ""
-                for c in cves:
-                    cve_text += f"[bold red]• {c['id']}[/bold red] (CVSS: {c['cvss']})\n{c['summary']}\n\n"
-
-            table.add_row(tech["name"], tech["version"], cve_text.strip())
-
+                cve_text = "None Found"
+                
+            table.add_row(tech_name, version, cve_text)
+            
         console.print(table)
+        console.print("\n")
